@@ -1,4 +1,7 @@
-# Game Architecture Using Scriptable Objects Part 1
+---
+layout: post
+title:  "Game Architecture Using Scriptable Objects Part 1"
+---
 
 It's been over seven years since Unite 2017 at Austin, but there is a certain video from that conference, that I constantly find myself going back to. If you've worked with Unity 3D in any kind of professional capacity in the time since, you've probably seen it too. 
 I am of course talking about Ryan Hipple's seminal lecture on building game architecture using scriptable objects.
@@ -33,8 +36,6 @@ As you can tell from, that lecture has had a big impact on me. Over the last sev
 
 Those who watched the video will no doubt point out that, there is actually code in there, and there is a repo in github with it. So why do you need to write it again? Well, the code in the video is not actually "production" code, it's more of an illustration of an approach, and as soon as you start to use it in practice a bunch of stuff jump out at you. Problems, which I have solved, so you don't have to!
 
-[THE LINK](https://github.com/HypnoBeaverMoose/ScriptableLibrary)
-
 The library is modeled on a number of abstract generic classes, that can be inherited to create concrete representations for concept in your project.
 ```
     [CreateAssetMenu]
@@ -50,3 +51,5 @@ You can use these to create scriptable objects in the project. Most of these wor
 ```
 
 Event better, I've gone ahead and covered most of the basic cases of C# primitives as well as vectors. They also provide a nice blueprint, in case you get stuck. In the [second part](/2024-12-07-game-architecture-using-scriptable-objects-part-2.md) I take deep dive into the actual implementation and highlight some of the more interesting aspects and reasoning behind various decisions I've made.
+
+[THE LINK](https://github.com/HypnoBeaverMoose/ScriptableLibrary)

@@ -1,4 +1,8 @@
-# Game Architecture Using Scriptable Objects Part 2
+---
+layout: post
+title:  "Game Architecture Using Scriptable Objects Part 2"
+---
+
 [In my last post](/2024-12-02-game-architecture-using-scriptable-objects-part-1.md) I introduced the [scriptable library](https://github.com/HypnoBeaverMoose/ScriptableLibrary), it's inspiration and my motivation for creating it. This time we're going to go further into the code itself and outline some of the more interesting aspects to look out for. I won't go in too deep into when and where to use it as Ryan has already done a pretty good job.
 
 ### Variables
@@ -80,7 +84,7 @@ public VariableReference<float> _health;
 
 Will take `FloatVariable` as a parameter.Thanks to some editor "magic" in the inspector the whole thing looks like this:
 
-![References](../images/reference.png)
+![References](/images/reference.png)
 
 ### Events
 
@@ -159,7 +163,7 @@ public class MyEventResponder : TypedEventResponder<Container, MyEvent> { }
 
 The last major feature of events I want to show you is the ability to invoke them manually with a custom payload. This is something I find very cool and useful and it helps reduce development time by not having you try and invoke some event through the game and hope it works. In the editor it looks like this:
 
-![Custom Invoke](../images/custom_invoke.png)
+![Custom Invoke](/images/custom_invoke.png)
 
 Currently, the manual invoke is supported for handful of types, however I hope that soon I'll be able to provide editor code for using it with custom container classes, like the one above.
 
