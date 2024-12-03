@@ -21,7 +21,7 @@
 title: HypnoBeaverMoose
 email: y.atanasoff@gmail.com
 author: Yasen Atanasov
-description: ""
+description: "This is a personal blog. I post about code I've written and I think is worth sharing."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://hypnobeavermoose.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 
