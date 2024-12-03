@@ -4,15 +4,11 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+<img src="/images/moose.png" width="200" height="200" />
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+My name is Yasen Atanasov (not pictured). 
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+I'm primarily a game developer, but I also like to dabble in compilers, computer graphics and other stuff. In general I like to solve interesting and hard problems and here try to share how I do it. 
 
-
-[jekyll-organization]: https://github.com/jekyll
+If you have a hard problem, that I can help with you can find me [here](mailto:y.atanasoff@gmail.com).
+Also you can take a look at my [github](https://github.com/HypnoBeaverMoose).
