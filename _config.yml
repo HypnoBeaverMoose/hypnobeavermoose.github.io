@@ -27,6 +27,9 @@ url: "https://hypnobeavermoose.github.io/" # the base hostname & protocol for yo
 
 github_username: hypnobeavermoose
 linkedin_username: yasen-atanasov-57082941
+minima:
+header_pages:
+- about.md
 
 show_excerpts: true
 

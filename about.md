@@ -1,8 +1,8 @@
 ---
 layout: page
+title: About
 permalink: /about/
 ---
-
 <img src="/images/moose.png" width="200" height="200" />
 
 My name is Yasen (not pictured). 
