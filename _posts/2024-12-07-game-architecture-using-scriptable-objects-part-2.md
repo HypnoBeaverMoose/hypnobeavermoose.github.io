@@ -3,11 +3,11 @@ layout: post
 title:  "Game Architecture Using Scriptable Objects Part 2"
 ---
 
-[In my last post](/2024-12-02-game-architecture-using-scriptable-objects-part-1.md) I introduced the [scriptable library](https://github.com/HypnoBeaverMoose/ScriptableLibrary), it's inspiration and my motivation for creating it. This time we're going to go further into the code itself and outline some of the more interesting aspects to look out for. I won't go in too deep into when and where to use it as Ryan has already done a pretty good job.
+>[In my last post](/2024-12-02-game-architecture-using-scriptable-objects-part-1.md) I introduced the [scriptable library](https://github.com/HypnoBeaverMoose/ScriptableLibrary), it's inspiration and my motivation for creating it. This time we're going to go further into the code and outline some of its the more interesting aspects. I will not really go too deep into when and where to use it as [Ryan](https://www.youtube.com/watch?v=raQ3iHhE_Kk) has already done a pretty good job.
 
 ### Variables
 
-A "scriptable" variable is an object that represents a single value. It can be a player's health, a user's input or any other value, that you might want to "inject" into a script. The cool thing about this type of variable is that it's a shared state, is easily accessible in the project and it's value can be set directly from the editor, which means it makes things easy to test.
+A "scriptable" variable is an object that represents a single value. That's... basically it. It can be a player's health, a user's input or any other value that you might want to "inject" into a script. The cool thing about this is that it is essentially a shared state between multiple elements in your game. Also, it is easily accessible in the project and it's value can be set directly from the editor, which means it makes things very easy to test.
 
 ```cs
 public class Variable<T> : ScriptableObject
@@ -30,16 +30,20 @@ public class Variable<T> : ScriptableObject
 
 ```
 
-You may notice two key differences from the original code. 
+If you've watched the lecture you may notice two key differences from the original code. 
 
-First it's `HideFlags.DontUnloadUnusedAsset`. [`HideFlags`](https://docs.unity3d.com/ScriptReference/HideFlags.html) is very misleading name, because it does way more than control the "hiding" behaviour. I guess `HideUnloadAndSaveFlags` was deemed too long. For us, what is important is that we can use it for force Unity to keep the exact instance of our variable around. Otherwise, even if the same variable is referenced in the next scene, this instance is going to be destroyed (especially if you call `UnloadUnusedAssets`) and then a new one will be created in it's place - which is rarely something you need.
+First it's `HideFlags.DontUnloadUnusedAsset`. [`HideFlags`](https://docs.unity3d.com/ScriptReference/HideFlags.html) is very misleading name, because it's way more than "flags for hiding", but I guess `HideUnloadAndSaveFlags` was deemed too long. For us, what is important is that we can use it for force Unity to keep the current instance of our variable around. Otherwise, even if the same variable is referenced in the next scene, the current instance is going to be destroyed (especially if you call `UnloadUnusedAssets`) and then a new one will be created in it's place - which is rarely something you need.
 
-You may have also noticed that we have a `realValue` in addition to the `_value`. What's up with that? Well that gives us the benefits of having a serialized value, that we can access and set in the inspector, combined with the benefits of not having to reset this value manually back to the original after some script changed it in play mode. That's taken care for us by the `OnValidate` method. More specifically, it does two things:
+You may have also noticed that we have a `realValue` in addition to the `_value`. What's up with that? 
+
+Well that gives us the benefits of having a serialized value, that we can access and set in the inspector, combined with the benefits of not having to reset this value manually back to the original after some script changed it in play mode. Basically we're having our `_cake` and eating our `_realCake`, too. I crack myself up.
+
+`OnValidate` does two things here:
 
 - Ensures, that `realValue` is set to `_value` every time we change `_value` through the inspector.
 - Resets the value of `realValue` to `_value`, after the asset has been deserialized, which happens, most importantly, after domain reload.
 
-You probably also noticed the `[System.NonSerialized]`, which might seem redundant. After all we all Unity doesn't serialize private variables, right? Right?
+You probably also noticed the `[System.NonSerialized]`, which might seem redundant. After all we all Unity doesn't serialize private variables, right? Right? Uhm... about that:
 
 > Unlike other cases of serialization, Unity serializes private fields by default when reloading, even if they don’t have the SerializeField attribute.
 
@@ -82,13 +86,13 @@ So, what this class does, is that it gives you the ability to set both a scripta
 public VariableReference<float> _health;
 ```
 
-Will take `FloatVariable` as a parameter.Thanks to some editor "magic" in the inspector the whole thing looks like this:
+will take `FloatVariable` as a parameter. And, thanks to some editor "magic" in the inspector the whole thing looks like this:
 
 ![References](/images/reference.png)
 
 ### Events
 
-Events on the other hand are pretty straightforward. It's just a script with an event and a two methods to encapsulate the event. The encapsulation we need in case we decide to store the callbacks in some different manner down the road.
+Events, on the other hand, are pretty straightforward. It's just a script with an event and a two methods to encapsulate the event. The encapsulation we need in case we decide to store the callbacks in some different manner down the road.
 ```cs
 public abstract class TypedEvent<T> : ScriptableObject
 {
@@ -110,8 +114,7 @@ public abstract class TypedEvent<T> : ScriptableObject
     }
 }
 ```
-You'll notice, that this is a `Typed` event. Each event has a payload type, that gets delivered to the listeners. There is also a `VoidEvent`, but it's really not that interesting. These events live as files in the project and you can subscribe to them directly by passing them to a script in the scene or use a responder. Responders are useful if you want to try (and key word he is always "try") to separate the library from the code of your game as much as possible. Whenever the events gets invoked the responder passes this invocation to a corresponding public method through a `UnityEvent`.
-
+You'll notice, that this is a `Typed` event. Each event has a payload type, that gets delivered to the listeners. There is also a `VoidEvent`, but it's really not that interesting. These events live as files in the project and you can subscribe to them directly by passing them to a script in the scene or use a responder. Responders are useful if you want to try (and key word here is always "try") to separate the library from the code of your game as much as possible. Whenever the events gets invoked the responder passes this invocation to a corresponding public method through a `UnityEvent`.
 
 ```cs
 public abstract class TypedEventResponder<T, E> : MonoBehaviour where E : TypedEvent<T>
@@ -161,7 +164,7 @@ public class MyEvent : TypedEvent<Container> { }
 public class MyEventResponder : TypedEventResponder<Container, MyEvent> { }
 ```
 
-The last major feature of events I want to show you is the ability to invoke them manually with a custom payload. This is something I find very cool and useful and it helps reduce development time by not having you try and invoke some event through the game and hope it works. In the editor it looks like this:
+The last major feature of events I want to show you is the ability to invoke them manually. This is something I find very cool and useful and it helps reduce development time by not having you try and invoke the event through the game and hope it works. In the editor it looks like this:
 
 ![Custom Invoke](/images/custom_invoke.png)
 
@@ -169,11 +172,11 @@ Currently, the manual invoke is supported for handful of types, however I hope t
 
 ### RuntimeSets
 
-Runtime sets are a very simple concept, that can help replace a number of other ways we do things in Unity. First of all, a `RuntimeSet` is simply a scriptable object, that holds references to "things" in the scene. These "things" can be GameObjects, Components, or other type of `UnityEngine.Object` derivatives. What this does, is it provides you with another way of dealing with groups of objects, which might be superior to existing ones.
+Runtime sets are a very simple concept, that can help replace a number of other ways we do things in Unity. First of all, a `RuntimeSet` is simply a scriptable object that holds references to "things" in the scene. These "things" can be GameObjects, Components, or other type of `UnityEngine.Object` derivatives. What this does, is it provides you with another way of dealing with groups of objects, which might be superior to existing ones.
 
 - It's immune to initialization race conditions, unlike singletons. 
 - It's not performance intensive like `FindObjectOfType`
-- It's less error prone than Tags. And you can a single object in multiple lists. Where as you can only have a single tag for object.
+- It's less error prone than Tags. And you can a single object in multiple lists, where as you can only have a single tag for object.
 
 All you need to do to use RuntimeSets is to subclass the script with the same name and implement it for the type you need.
 
@@ -222,6 +225,8 @@ As with other concepts in this library, `RuntimeSet<T>` comes with a correspondi
 
 You can subclass `SetRegistar<T>` to have your objects be registered automatically when enabled. 
 
-### Conclusion
+> Side note: I am totally not jazzed about RegistAr, however I couldn't find anything better for "something that registers things". Suggestions are welcome.
 
-By diving into the code of the scriptable library, we've explored key components like scriptable variables, references, events, and runtime sets. Each of these elements offers practical solutions to common challenges in Unity game development, making your projects more modular, testable, and efficient. I encourage you to experiment with these tools and see how they can improve your workflow. Happy coding!
+### Finally
+
+I hope that this overview was useful and shed some light on how the scriptable library works. I will probably update it with more stuff in the future, so stay tuned. I also hope that can you this code in your next project, or get inspired to use a similar approach. Happy Coding!

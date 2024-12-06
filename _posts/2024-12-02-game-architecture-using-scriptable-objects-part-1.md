@@ -3,7 +3,7 @@ layout: post
 title:  "Game Architecture Using Scriptable Objects Part 1"
 ---
 
->Over the last several years I ended up implementing different variations of the ideas blow time and again. Which is why I decided to build a [small library](https://github.com/HypnoBeaverMoose/scriptable-library-unity), that can easily be imported into Unity as a package. Everything below explains why.
+>Over the last several years I ended up implementing different variations of the ideas below time and again. Which is why I decided to build a [small library](https://github.com/HypnoBeaverMoose/scriptable-library-unity) that can easily be [imported](https://docs.unity3d.com/Manual/upm-ui-giturl.html) into Unity as a package. Everything below explains why.
 
 It's been over seven years since Unite 2017 at Austin, but there is a certain video from that conference, that I constantly find myself going back to. If you've worked with Unity 3D in any kind of professional capacity in the time since, you've probably seen it too. 
 I am of course talking about Ryan Hipple's seminal lecture on building game architecture using scriptable objects.
