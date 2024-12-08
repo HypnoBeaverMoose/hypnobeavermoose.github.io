@@ -3,7 +3,7 @@ layout: post
 title:  "Game Architecture Using Scriptable Objects Part 2"
 ---
 
->[In my last post](/2024-12-02-game-architecture-using-scriptable-objects-part-1.md) I introduced the [scriptable library](https://github.com/HypnoBeaverMoose/ScriptableLibrary), it's inspiration and my motivation for creating it. This time we're going to go further into the code and outline some of its the more interesting aspects. I will not really go too deep into when and where to use it as [Ryan](https://www.youtube.com/watch?v=raQ3iHhE_Kk) has already done a pretty good job.
+>[In my last post]({% post_url 2024-12-02-game-architecture-using-scriptable-objects-part-1 %}) I introduced the [scriptable library](https://github.com/HypnoBeaverMoose/ScriptableLibrary), it's inspiration and my motivation for creating it. This time we're going to go further into the code and outline some of its the more interesting aspects. I will not really go too deep into when and where to use it as [Ryan](https://www.youtube.com/watch?v=raQ3iHhE_Kk) has already done a pretty good job.
 
 ### Variables
 

@@ -66,4 +66,8 @@ You can use these to create scriptable objects in the project. Most of these wor
     [CustomEditor(typeof(BoolEvent))]
     public class BoolEventEditor : EventEditorBase<bool> { }
 ```
-Event better, I've gone ahead and covered most of the basic cases of C# primitives as well as vectors. They also provide a nice blueprint, in case you get stuck. There will be a second part where I take deep dive into the actual implementation and highlight some of the more interesting aspects and reasoning behind various decisions I've made.
+Event better, I've gone ahead and covered most of the basic cases of C# primitives as well as vectors. They also provide a nice blueprint, in case you get stuck. 
+
+
+
+There is a [second part]({% post_url 2024-12-07-game-architecture-using-scriptable-objects-part-2 %}) where I take deep dive into the actual implementation and highlight some of the more interesting aspects and reasoning behind various decisions I've made.
