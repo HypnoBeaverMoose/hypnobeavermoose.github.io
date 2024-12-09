@@ -30,6 +30,7 @@ linkedin_username: yasen-atanasov-57082941
 minima:
 header_pages:
 - about.md
+- resume.md
 
 show_excerpts: true
 
