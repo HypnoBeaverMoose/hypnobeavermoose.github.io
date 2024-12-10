@@ -8,7 +8,7 @@ permalink: /resume/
 
 ## Work History 
 ---
-### Lead Engineer 06/2022 - 08/2023
+### Lead Engineer 09/2022 - 09/2023
 #### [Raraland Inc](https://www.rara.co/)
 
 After acting as a de facto Lead Engineer for a period of time I was officially promoted to Lead Engineer at Raraland. During this period my duties slowly shifted to maintaining the software and working closely with the rest of the team to help them develop the features we needed. I also oversaw a major pivot in the business model and product strategy.
@@ -22,12 +22,12 @@ My time was split 50/50 between programming and coordinating with the rest of th
 
 ---
 
-### Senior Engineer  09/2020 - 06/2022
+### Senior Engineer  09/2020 - 09/2022
 #### [Raraland Inc](https://www.rara.co/).
 
 Raraland Inc. is a US-based startup, that aims to revolutionize how people create and share games. The company's flagship product Rara was a mobile engine, that allowed users to create and share games entirely on their mobile devices. It was in a way similar to Roblox, however, the game creation was strictly mobile. The entire engine was built on top of Unity.
 
-During this period I built a major part of the engine and was responsible for a lot of the architectural decisions. I also took up a large long running refactoring effort to improve stability and development velocity, while at the same time pumping out features. Basically,we were changing the tires while racing.
+During this period I built a major part of the engine and was responsible for a lot of the architectural decisions. I also took up a large long running refactoring effort to improve stability and development velocity, while at the same time pumping out features. Basically, we were changing the tires while racing.
  - Core Architecture - How the engine was built. Entities, Instances, Components, Properties etc. Three different types of data models:
    - Backend - how the a game was represented on the server along with backwards compatibility.
    - Editmode - what the game creator sees, including different entities, components, and properties.
