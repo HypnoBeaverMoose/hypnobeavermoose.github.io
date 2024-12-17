@@ -4,7 +4,13 @@ title: Resume
 permalink: /resume/
 ---
 
+## Personal Information 
 ---
+- Name: Yasen Atanasov
+- Location: Sofia, Bulgaria
+- Email: [y.atanasoff@gmail.com](mailto:y.atanasoff@gmail.com)
+- [LinkedIn](www.linkedin.com/in/yasen-atanasov-57082941)
+- [Github](https://github.com/HypnoBeaverMoose)
 
 ## Work History 
 ---
